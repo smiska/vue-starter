@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="tbody">
-      <div class="trow" @click="editRow" v-for="user in filteredUsers" :key="user.id">
+      <div class="trow" v-for="user in filteredUsers" :key="user.id" @click="editRow(user)">
         <div class="tcell" v-for="value in user">{{ value }}</div>
       </div>
     </div>
@@ -29,9 +29,8 @@ export default {
     filterKey: String
   },
   methods: {
-    editRow(event) {
-      this.$emit("showModal", event.target.p);
-      console.log(event);
+    editRow(user) {
+      this.$emit("showModal", user);
     },
     sortBy(key) {
       this.sortKey = key;
@@ -45,7 +44,8 @@ export default {
     });
     return {
       sortKey: "",
-      sortOrders: sortOrders
+      sortOrders: sortOrders,
+      selectedUser: ""
     };
   },
   computed: {
@@ -66,8 +66,6 @@ export default {
         });
       }
       if (sortKey) {
-        debugger;
-
         users = users.slice().sort(function(a, b) {
           a = a[sortKey];
           b = b[sortKey];

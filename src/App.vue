@@ -35,6 +35,7 @@
 
 <script>
 import TableDisplay from "./components/TableDisplay.vue";
+import Modal from "./components/Modal.vue";
 import axios from "axios";
 
 const ITEM = {
@@ -59,10 +60,9 @@ export default {
     };
   },
   methods: {
-    onShowModal() {
+    onShowModal(user) {
       this.showModal = !this.showModal;
     },
-    filterUsers() {},
     mapToEnglish(users) {
       return users.map(user => {
         this.validateUser(user);
@@ -108,14 +108,14 @@ export default {
       // use mapped properties for users and column data
       this.users = this.mapToEnglish(users);
       this.columns = Object.keys(this.users[0]);
-      console.log("headers", this.headers, "cols", this.columns);
     } catch (error) {
       // TODO - error handling gracefully
       this.error = error;
     }
   },
   components: {
-    TableDisplay
+    TableDisplay,
+    Modal
   }
 };
 </script>
