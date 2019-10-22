@@ -1,7 +1,15 @@
 <template>
   <div class="table">
     <div class="thead">
-      <div v-for="column in columns" class="tcell">{{ column }}</div>
+      <div
+        v-for="(column, index) in columns"
+        class="tcell"
+        @click="sortBy(column)"
+        :class="{ active: sortKey == column }"
+      >
+        {{ headers[index] }}
+        <span class="arrow" :class="sortOrders[column] > 0 ? 'asc' : 'dsc'"></span>
+      </div>
     </div>
     <div class="tbody">
       <div class="trow" @click="editRow" v-for="user in filteredUsers" :key="user.id">
@@ -16,6 +24,7 @@ export default {
   name: "TableDisplay",
   props: {
     users: Array,
+    headers: Array,
     columns: Array,
     filterKey: String
   },
@@ -41,7 +50,6 @@ export default {
   },
   computed: {
     filteredUsers: function() {
-      debugger;
       var sortKey = this.sortKey;
       var filterKey = this.filterKey && this.filterKey.toLowerCase();
       var order = this.sortOrders[sortKey] || 1;
@@ -58,6 +66,8 @@ export default {
         });
       }
       if (sortKey) {
+        debugger;
+
         users = users.slice().sort(function(a, b) {
           a = a[sortKey];
           b = b[sortKey];
@@ -114,5 +124,34 @@ export default {
   height: 4em;
   margin: 0.1em;
   border: 2px solid #ebebeb;
+}
+
+.thead .tcell.active {
+  color: #0bc;
+}
+
+.thead .tcell .arrow {
+  opacity: 1;
+}
+
+.arrow {
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  opacity: 0.66;
+}
+
+.arrow.asc {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #000000;
+}
+
+.arrow.dsc {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #000000;
 }
 </style>

@@ -24,6 +24,7 @@
     <TableDisplay
       @showModal="onShowModal"
       v-bind:users="users"
+      v-bind:headers="headers"
       v-bind:columns="columns"
       v-bind:filter-key="searchQuery"
       v-else
@@ -50,6 +51,7 @@ export default {
   data() {
     return {
       searchQuery: "",
+      headers: [],
       columns: [],
       users: [],
       error: "",
@@ -100,11 +102,13 @@ export default {
       const response = await axios.get("./db.json");
       const users = response.data;
 
-      // assign original DB user keys
-      this.columns = Object.keys(users[0]);
+      // assign original DB user keys as table headers
+      this.headers = Object.keys(users[0]);
 
-      // use mapped properties for users
+      // use mapped properties for users and column data
       this.users = this.mapToEnglish(users);
+      this.columns = Object.keys(this.users[0]);
+      console.log("headers", this.headers, "cols", this.columns);
     } catch (error) {
       // TODO - error handling gracefully
       this.error = error;
