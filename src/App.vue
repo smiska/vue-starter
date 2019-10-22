@@ -2,12 +2,30 @@
   <div id="app">
     <h1>KonaSoft App</h1>
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+    <div>
+      <form>
+        <div class="form-group">
+          <label for="searchQuery">Search Text:</label>
+          <input
+            name="seach"
+            type="text"
+            class="form-control"
+            id="searchQuery"
+            aria-describedby="searchQuery"
+            placeholder="Enter search term"
+            v-model="searchQuery"
+          />
+          <small id="searchHelp" class="form-text text-muted">Filter users by entering search term</small>
+        </div>
+      </form>
+    </div>
     <h3 v-if="error">{{ error }}</h3>
+
     <TableDisplay
       @showModal="onShowModal"
       v-bind:users="users"
       v-bind:columns="columns"
-      v-bind:filterText="filterText"
+      v-bind:filter-key="searchQuery"
       v-else
     ></TableDisplay>
     <Modal @showModal="onShowModal" v-if="showModal"></Modal>
@@ -16,7 +34,6 @@
 
 <script>
 import TableDisplay from "./components/TableDisplay.vue";
-import Modal from "./components/Modal.vue";
 import axios from "axios";
 
 const ITEM = {
@@ -32,7 +49,7 @@ export default {
   name: "app",
   data() {
     return {
-      filterText: "",
+      searchQuery: "",
       columns: [],
       users: [],
       error: "",
@@ -43,6 +60,7 @@ export default {
     onShowModal() {
       this.showModal = !this.showModal;
     },
+    filterUsers() {},
     mapToEnglish(users) {
       return users.map(user => {
         this.validateUser(user);
@@ -93,8 +111,7 @@ export default {
     }
   },
   components: {
-    TableDisplay,
-    Modal
+    TableDisplay
   }
 };
 </script>
@@ -110,6 +127,10 @@ export default {
 
   h1 {
     margin-bottom: 30px;
+  }
+  form {
+    width: 50%;
+    margin: 0 auto;
   }
 }
 </style>

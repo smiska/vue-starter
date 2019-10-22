@@ -4,7 +4,7 @@
       <div v-for="column in columns" class="tcell">{{ column }}</div>
     </div>
     <div class="tbody">
-      <div class="trow" @click="editRow" v-for="user in users" :key="user.id">
+      <div class="trow" @click="editRow" v-for="user in filteredUsers" :key="user.id">
         <div class="tcell" v-for="value in user">{{ value }}</div>
       </div>
     </div>
@@ -17,15 +17,56 @@ export default {
   props: {
     users: Array,
     columns: Array,
-    filterText: String
+    filterKey: String
   },
   methods: {
     editRow(event) {
       this.$emit("showModal", event.target.p);
       console.log(event);
+    },
+    sortBy(key) {
+      this.sortKey = key;
+      this.sortOrders[key] = this.sortOrders[key] * -1;
     }
   },
-  components: {}
+  data: function() {
+    var sortOrders = {};
+    this.columns.forEach(function(key) {
+      sortOrders[key] = 1;
+    });
+    return {
+      sortKey: "",
+      sortOrders: sortOrders
+    };
+  },
+  computed: {
+    filteredUsers: function() {
+      debugger;
+      var sortKey = this.sortKey;
+      var filterKey = this.filterKey && this.filterKey.toLowerCase();
+      var order = this.sortOrders[sortKey] || 1;
+      var users = this.users;
+      if (filterKey) {
+        users = users.filter(function(row) {
+          return Object.keys(row).some(function(key) {
+            return (
+              String(row[key])
+                .toLowerCase()
+                .indexOf(filterKey) > -1
+            );
+          });
+        });
+      }
+      if (sortKey) {
+        users = users.slice().sort(function(a, b) {
+          a = a[sortKey];
+          b = b[sortKey];
+          return (a === b ? 0 : a > b ? 1 : -1) * order;
+        });
+      }
+      return users;
+    }
+  }
 };
 </script>
 
