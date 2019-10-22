@@ -1,0 +1,115 @@
+[
+  {
+    "Id": 1,
+    "Nev": "László",
+    "Jogosultságok": [
+      {
+        "Id": 1,
+        "Nev": "Módosítás"
+      },
+      {
+        "Id": 2,
+        "Nev": "Olvasás"
+      }
+    ],
+    "Eletkor": 25,
+    "Regisztralt": "2019-01-31 06:45:51.557Z",
+    "Munkahely": {
+      "Id": 12,
+      "Nev": "Cég 1"
+    }
+  },
+  {
+    "Id": 2,
+    "Nev": "Péter",
+    "Jogosultságok": [
+      {
+        "Id": 2,
+        "Nev": "Olvasás"
+      }
+    ],
+    "Eletkor": 44,
+    "Regisztralt": "2011-01-31 09:23:51.234Z",
+    "Munkahely": {
+      "Id": 34,
+      "Nev": "Cég 2"
+    }
+  },
+  {
+    "Id": 3,
+    "Nev": "Zénó",
+    "Jogosultságok": [
+      {
+        "Id": 2,
+        "Nev": "Olvasás"
+      }
+    ],
+    "Eletkor": 25,
+    "Regisztralt": "2015-03-12 06:42:51.345Z",
+    "Munkahely": {
+      "Id": 34,
+      "Nev": "Cég 2"
+    }
+  },
+  {
+    "Id": 4,
+    "Nev": "Zakariás",
+    "Jogosultságok": [
+      {
+        "Id": 1,
+        "Nev": "Módosítás"
+      },
+      {
+        "Id": 2,
+        "Nev": "Olvasás"
+      }
+    ],
+    "Eletkor": 88,
+    "Regisztralt": "2000-01-12 12:44:55.111Z",
+    "Munkahely": {
+      "Id": 12,
+      "Nev": "Cég 1"
+    }
+  },
+  {
+    "Id": 5,
+    "Nev": "Emma",
+    "Eletkor": 25,
+    "Regisztralt": "2014-06-16 12:12:34.557Z",
+    "Munkahely": {
+      "Id": 12,
+      "Nev": "Cég 1"
+    }
+  },
+  {
+    "Id": 6,
+    "Nev": "Jenő",
+    "Jogosultságok": [
+      {
+        "Id": 1,
+        "Nev": "Módosítás"
+      },
+      {
+        "Id": 2,
+        "Nev": "Olvasás"
+      }
+    ],
+    "Eletkor": 32,
+    "Regisztralt": "2019-09-23 12:23:51.557Z",
+    "Munkahely": {
+      "Id": 12,
+      "Nev": "Cég 1"
+    }
+  },
+  {
+    "Id": 7,
+    "Nev": "Mira",
+    "Jogosultságok": [],
+    "Eletkor": 55,
+    "Regisztralt": "2013-11-12 10:23:51.557Z",
+    "Munkahely": {
+      "Id": 12,
+      "Nev": "Cég 1"
+    }
+  }
+]
